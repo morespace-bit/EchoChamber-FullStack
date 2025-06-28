@@ -1,12 +1,16 @@
 import {
   AllowNull,
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
+  ForeignKey,
   Model,
   PrimaryKey,
   Table,
 } from "sequelize-typescript";
+
+import User from "./user.model";
 
 @Table({
   tableName: "posts",
@@ -26,4 +30,14 @@ class Post extends Model {
   @AllowNull(true)
   @Column(DataType.STRING)
   imageUrl?: string;
+
+  @ForeignKey(() => User)
+  @AllowNull(false)
+  @Column(DataType.UUID)
+  userId!: string;
+
+  @BelongsTo(() => User)
+  author!: User;
 }
+
+export default Post;

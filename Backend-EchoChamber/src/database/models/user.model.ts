@@ -10,6 +10,8 @@ import {
   HasMany,
 } from "sequelize-typescript";
 
+import Post from "./post.model";
+
 @Table({
   tableName: "users",
   modelName: "User",
@@ -19,15 +21,16 @@ class User extends Model {
   @PrimaryKey
   @AllowNull(false)
   @Default(DataType.UUIDV4)
+  @Column(DataType.UUID)
   id!: string;
 
   @AllowNull(false)
-  @Unique(true)
+  @Unique
   @Column(DataType.STRING)
   username!: string;
 
   @AllowNull(false)
-  @Unique(true)
+  @Unique
   @Column(DataType.STRING)
   email!: string;
 
