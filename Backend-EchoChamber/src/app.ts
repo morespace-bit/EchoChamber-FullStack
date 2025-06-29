@@ -3,6 +3,7 @@ import express, { Response, Request } from "express";
 const app = express();
 import authRoute from "./routes/auth.route";
 import profileRoute from "./routes/profile.route";
+import postRoute from "./routes/post.route";
 
 // this is done so that our express app can parse the incomming data that comes in the json format
 app.use(express.json());
@@ -12,5 +13,5 @@ app.use(express.json());
 // });
 app.use("/api", authRoute);
 app.use("/api", profileRoute);
-
+app.use("/api", postRoute);
 export default app;
