@@ -38,6 +38,13 @@ class User extends Model {
   @Column(DataType.STRING)
   password!: string;
 
+  @Unique
+  @Column(DataType.STRING)
+  username?: string;
+
+  @Column(DataType.STRING)
+  profile?: string;
+
   @Default("user")
   @Column({
     type: DataType.ENUM("user", "admin", "moderator"),
