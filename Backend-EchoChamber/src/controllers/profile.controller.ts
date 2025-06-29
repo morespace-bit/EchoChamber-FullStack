@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import User from "../database/models/user.model";
+import { ExtendedRequest } from "../global/type";
 
 class Profile {
-  static async createProfile(req: Request, res: Response) {
-    const id = 1;
+  static async createProfile(req: ExtendedRequest, res: Response) {
+    const id = req.user?.id;
+
     if (!req.body) {
       res.status(400).json({ message: "Request body is undefined" });
       return;
@@ -32,3 +34,5 @@ class Profile {
     }
   }
 }
+
+export default Profile;
