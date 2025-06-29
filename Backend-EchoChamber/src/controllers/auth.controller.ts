@@ -27,12 +27,18 @@ class AuthController {
     }
 
     try {
-      await User.create({
+      const newUser = await User.create({
         email,
         password: await bcrypt.hash(password, 12),
       });
 
-      res.status(200).json({ message: "The user was reginstred successfully" });
+      const token = jwt.sign({ id: newUser.id }, "echochamber", {
+        expiresIn: "30d",
+      });
+
+      res
+        .status(201)
+        .json({ message: "The user was reginstred successfully", token });
     } catch (e) {
       console.log(e);
       res.status(500).json({ message: "Something went wrong" });
