@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ExtendedRequest } from "../global/type";
 import Post from "../database/models/post.model";
+import User from "../database/models/user.model";
 
 class PostController {
   static async createPost(req: ExtendedRequest, res: Response) {
@@ -34,6 +35,27 @@ class PostController {
       res
         .status(500)
         .json({ message: "Internal server error while crating post" });
+    }
+  }
+
+  static async getAllPost(req: Request, res: Response) {
+    try {
+      const post = await Post.findAll({
+        order: [["createdAt", "desc"]],
+        include: {
+          model: User,
+          attributes: ["id", "username", "profile"],
+        },
+      });
+
+      res
+        .status(200)
+        .json({ message: "Post data fetched succesfully", data: post });
+      return;
+    } catch (e) {
+      console.log("Error while getting the post", e);
+      res.status(500).json({ message: "Internal server error" });
+      return;
     }
   }
 }

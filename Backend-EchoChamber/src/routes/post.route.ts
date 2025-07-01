@@ -8,4 +8,6 @@ router
   .route("/createPost")
   .post(Middleware.isLoggedIn, PostController.createPost);
 
+router.route("/getAllPost").get(PostController.getAllPost);
+
 export default router;

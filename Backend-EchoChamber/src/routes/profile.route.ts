@@ -8,4 +8,6 @@ router
   .route("/createProfile")
   .post(Middleware.isLoggedIn, Profile.createProfile);
 
+router.route("/getProfile").get(Middleware.isLoggedIn, Profile.getProfile);
+
 export default router;

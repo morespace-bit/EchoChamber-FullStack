@@ -24,11 +24,6 @@ class User extends Model {
   @Column(DataType.UUID)
   id!: string;
 
-  // @AllowNull(false)
-  // @Unique
-  // @Column(DataType.STRING)
-  // username!: string;
-
   @AllowNull(false)
   @Unique
   @Column(DataType.STRING)
@@ -38,7 +33,6 @@ class User extends Model {
   @Column(DataType.STRING)
   password!: string;
 
-  @Unique
   @Column(DataType.STRING)
   username?: string;
 
