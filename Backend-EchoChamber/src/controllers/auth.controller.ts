@@ -20,7 +20,7 @@ class AuthController {
         .json({ message: "Please provide both email and password" });
       return;
     }
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email: email } });
     if (user) {
       res.status(400).json({ message: "User already exists Please log in" });
       return;

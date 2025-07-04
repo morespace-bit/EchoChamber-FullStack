@@ -4,6 +4,7 @@ import {
   BelongsTo,
   Column,
   DataType,
+  Default,
   ForeignKey,
   Model,
   PrimaryKey,
@@ -38,6 +39,11 @@ class Post extends Model {
 
   @BelongsTo(() => User)
   author!: User;
+
+  @AllowNull(false)
+  @Default(0)
+  @Column(DataType.INTEGER)
+  likes!: number;
 }
 
 export default Post;
