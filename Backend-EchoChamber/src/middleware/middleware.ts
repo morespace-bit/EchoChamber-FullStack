@@ -26,6 +26,7 @@ class Middleware {
       next();
     } catch (e) {
       console.log("Error", e);
+      res.status(401).json({ message: "jwt auth failed" });
     }
   }
 }

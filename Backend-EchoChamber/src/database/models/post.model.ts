@@ -44,6 +44,11 @@ class Post extends Model {
   @Default(0)
   @Column(DataType.INTEGER)
   likes!: number;
+
+  @AllowNull(false)
+  @Default(0)
+  @Column(DataType.INTEGER)
+  reports!: number;
 }
 
 export default Post;

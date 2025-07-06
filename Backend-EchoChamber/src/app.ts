@@ -5,6 +5,9 @@ import authRoute from "./routes/auth.route";
 import profileRoute from "./routes/profile.route";
 import postRoute from "./routes/post.route";
 import likeRoute from "./routes/like.route";
+import verifyRoute from "./routes/verify/verify.route";
+import reportRoute from "./routes/report.route";
+
 import cors from "cors";
 // this is the cors function mean cross origin resource sharing a browser mechanism to prevent resource shareing to different webpages
 // so to make it work we have to use this
@@ -26,4 +29,6 @@ app.use("/api", authRoute);
 app.use("/api", profileRoute);
 app.use("/api", postRoute);
 app.use("/api", likeRoute);
+app.use("/api", reportRoute);
+app.use("/api", verifyRoute);
 export default app;
