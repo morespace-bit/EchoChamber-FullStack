@@ -10,4 +10,6 @@ router
 
 router.route("/getProfile").get(Middleware.isLoggedIn, Profile.getProfile);
 
+router.route("/getUserProfile/:u_id").get(Profile.getUserProfile);
+
 export default router;

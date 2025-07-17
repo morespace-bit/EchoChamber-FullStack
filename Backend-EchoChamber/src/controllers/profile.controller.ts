@@ -65,6 +65,35 @@ class Profile {
       res.status(500).json({ message: "Internal server error" });
     }
   }
+
+  // to get the user profile based on the id passed through the params
+
+  static async getUserProfile(req: Request, res: Response) {
+    const { u_id } = req.params;
+
+    try {
+      const data = await User.findOne({
+        where: {
+          id: u_id,
+        },
+        attributes: ["id", "username", "profile"],
+      });
+
+      if (!data?.username) {
+        res
+          .status(404)
+          .json({ message: "The requested user profile was not found" });
+        return;
+      }
+
+      res
+        .status(200)
+        .json({ message: "fetching of user data successfull", data });
+    } catch (e) {
+      res.status(500).json({ message: "There was internal server error" });
+      console.log("There was error when fetching user profile", e);
+    }
+  }
 }
 
 export default Profile;
