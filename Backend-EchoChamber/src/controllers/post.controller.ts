@@ -58,6 +58,38 @@ class PostController {
       return;
     }
   }
+
+  static async getUserPost(req: Request, res: Response) {
+    const { u_id } = req.params;
+
+    if (!u_id) {
+      res.status(404).json({ message: "User profile not found" });
+      return;
+    }
+    try {
+      const data = await User.findOne({
+        where: {
+          id: u_id,
+        },
+        include: {
+          model: Post,
+        },
+      });
+
+      if (!data) {
+        res.status(404).json({ messae: "The post of the user was not found" });
+        return;
+      }
+
+      res
+        .status(200)
+        .json({ message: "The user data fetching was successfull", data });
+    } catch (e) {
+      res.status(500).json({ message: "Internal server error" });
+      console.log("Error in the fetching of data for users", e);
+      return;
+    }
+  }
 }
 
 export default PostController;

@@ -10,4 +10,6 @@ router
 
 router.route("/getAllPost").get(PostController.getAllPost);
 
+router.route("/getUserPost/:u_id").get(PostController.getUserPost);
+
 export default router;
