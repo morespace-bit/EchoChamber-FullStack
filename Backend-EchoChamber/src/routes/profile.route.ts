@@ -12,4 +12,6 @@ router.route("/getProfile").get(Middleware.isLoggedIn, Profile.getProfile);
 
 router.route("/getUserProfile/:u_id").get(Profile.getUserProfile);
 
+router.route("/search").get(Profile.searchUser);
+
 export default router;

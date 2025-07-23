@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import User from "../database/models/user.model";
 import { ExtendedRequest } from "../global/type";
+import Post from "../database/models/post.model";
+import { Op } from "sequelize";
 
 class Profile {
   static async createProfile(req: ExtendedRequest, res: Response) {
@@ -76,7 +78,9 @@ class Profile {
         where: {
           id: u_id,
         },
+
         attributes: ["id", "username", "profile"],
+        include: { model: Post },
       });
 
       if (!data?.username) {
@@ -92,6 +96,37 @@ class Profile {
     } catch (e) {
       res.status(500).json({ message: "There was internal server error" });
       console.log("There was error when fetching user profile", e);
+    }
+  }
+
+  // search user profile
+
+  static async searchUser(req: Request, res: Response) {
+    if (!req.query.search) {
+      res.status(400).json({ message: "please enter a valid search term" });
+      return;
+    }
+
+    const { search } = req.query;
+
+    try {
+      const users = await User.findAll({
+        where: {
+          username: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+        attributes: ["id", "username", "profile"],
+      });
+
+      if (users.length != 0) {
+        res.status(200).json({ message: "Users found", data: users });
+      } else {
+        res.status(404).json({ message: "User not found" });
+      }
+    } catch (e) {
+      res.status(500).json({ messaeg: "Internal server error" });
+      console.error("Error while seraching user profle", e);
     }
   }
 }
