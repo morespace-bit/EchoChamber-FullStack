@@ -24,6 +24,9 @@ app.use(express.json());
 // app.use("/home", (req: Request, res: Response) => {
 //   res.send("Hello");
 // });
+app.get("/", (req: Request, res: Response) => {
+  res.send("EchoChamber backend is running.");
+});
 
 app.use("/api", authRoute);
 app.use("/api", profileRoute);
