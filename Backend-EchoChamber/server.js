@@ -1,8 +1,6 @@
-import { dotEnv } from "./src/config/config";
-import "./src/database/connection";
+// import { dotEnv } from "./src/config/config";
+// import "./src/database/connection";
 import express from "express";
-
-// import app from "./src/app";
 
 const app = express();
 
