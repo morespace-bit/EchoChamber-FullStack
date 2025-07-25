@@ -1,4 +1,4 @@
-// import "./src/database/connection";
+import "./src/database/connection";
 import app from "./src/app";
 
 export default app;
