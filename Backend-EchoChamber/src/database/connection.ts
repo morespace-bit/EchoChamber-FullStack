@@ -4,6 +4,9 @@ import path from "path";
 
 const sequelize = new Sequelize(dotEnv.databaseUrl ? dotEnv.databaseUrl : "", {
   dialect: "postgres",
+  dialectOptions: {
+    family: 4, //  forces IPv4, avoids ENETUNREACH
+  },
   models: [path.resolve(__dirname, "models")], // this code goes to the models folder and imports any files or class that is exported which extends the Model class here the User class also extends the Model class
 });
 
