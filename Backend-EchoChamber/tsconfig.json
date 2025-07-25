@@ -108,6 +108,12 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */
-  }
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "rootDir": ".", // Ensure TypeScript starts from your project root
+    "outDir": "dist", // Output compiled JS into dist folder
+
+    "resolveJsonModule": true, // Useful if importing JSON configs
+    "moduleResolution": "node" // Required for Express, etc.
+  },
+  "include": ["server.ts", "src/**/*"]
 }
